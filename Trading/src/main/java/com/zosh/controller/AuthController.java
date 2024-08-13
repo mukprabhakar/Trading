@@ -71,6 +71,10 @@ public class AuthController {
     public ResponseEntity<AuthResponse> login(@RequestBody User user) throws Exception {
         String userName = user.getEmail();
         String password = user.getPassword();
+        // Check if password is null or empty
+        if (password == null || password.isEmpty()) {
+            throw new IllegalArgumentException("User password cannot be null or empty");
+        }
 
         Authentication auth = authenticate(userName, password);
 
